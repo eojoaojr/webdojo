@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add("starter", (email, password) => {
+Cypress.Commands.add("starter", () => {
   cy.viewport(1920, 1080);
   cy.visit("http://localhost:3000");
 });
@@ -34,3 +34,15 @@ Cypress.Commands.add("SubmitLoginForm", (email, password) => {
   cy.get("#password").type(password);
   cy.contains("button", "Entrar").click();
 });
+
+
+Cypress.Commands.add("SubmitLoginFormWithoutPassword", (email) => {
+  cy.get("#email").type(email);
+  cy.contains("button", "Entrar").click();
+});
+
+Cypress.Commands.add("SubmitLoginFormWithoutEmail", (password) => {
+  cy.get("#password").type(password);
+  cy.contains("button", "Entrar").click();
+});
+
