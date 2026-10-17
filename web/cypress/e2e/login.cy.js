@@ -1,3 +1,11 @@
+// 1. Criando a função reutilizável
+function executarLoopDezVezes(callback) {
+  Cypress._.times(10, (index) => {
+    // index começa em 0 e vai até 9
+    callback(index + 1); 
+  });
+}
+
 describe("Login", () => {
   it("Deve logar com sucesso", () => {
     cy.starter()
@@ -99,5 +107,20 @@ describe("Login", () => {
     cy.starter()
     cy.contains("button", "Esqueci minha senha").click();
     console.log("Clicou no botão de esqueci minha senha");
+  });
+});
+
+describe("Login", () => {
+  it("CN002 - Visualizar opção de ver senha", () => {
+    cy.starter()
+    cy.SimpleForm('papito@webdojo.com','incorrect_password')
+    executarLoopDezVezes((index) => {
+      cy.get('svg.lucide-eye').parent().click();
+      cy.get('#password').should('have.attr', 'type', 'text');
+      console.log(`Passou ${index} vezes`);
+      cy.get('svg.lucide-eye-off').parent().click();
+      cy.get('#password').should('have.attr', 'type', 'password');
+      console.log(`Passou ${index} vezes`);
+    });
   });
 });

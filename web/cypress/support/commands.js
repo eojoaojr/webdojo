@@ -46,3 +46,11 @@ Cypress.Commands.add("SubmitLoginFormWithoutEmail", (password) => {
   cy.contains("button", "Entrar").click();
 });
 
+
+Cypress.Commands.add("SimpleForm", (email, password) => {
+  cy.get("#email").type(email);
+  cy.get("#password").type(password);
+});
+
+
+
